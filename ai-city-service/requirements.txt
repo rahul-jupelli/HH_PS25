@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+celery
+pika
+python-dotenv
+supabase
+google-generativeai
+requests
+python-multipart     # (only needed if FastAPI ever handles file uploads)

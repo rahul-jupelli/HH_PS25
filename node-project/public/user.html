@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile | HorizonHaven</title>
+    <link rel="stylesheet" href="css/user.css">
+    <link rel="stylesheet" href="./css/navbar.css" />
+</head>
+<body>
+    
+<!-- Navbar -->
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="dashboard.html" class="logo">Horizon<span>Haven</span></a>
+
+        <!-- Auth area: JS will replace content here when user is logged in -->
+        <div class="nav-links" id="auth-area">
+        <!-- Default guest state -->
+        <a href="login.html" id="List">List your property</a>
+        <button class="login-btn" onclick="window.location.href='login.html'">
+            Log in / Sign up
+        </button>
+        </div>
+    </nav>
+    
+    <!-- User Profile Section -->
+    <div class="profile-container">
+        <div class="profile-card">
+            <div class="profile-img">
+                <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="User Image">
+            </div>
+
+            <div class="user-info" id="user-info">
+                <button class="edit-btn" id="editProfileBtn">Edit Profile</button>
+            </div>
+
+            <div id="edit-form" class="edit-form" style="display:none;">
+                <div class="form-group">
+                    <label for="edit-name">Name</label>
+                    <input type="text" id="edit-name" placeholder="Enter your name" />
+                </div>
+                <div class="form-group">
+                    <label for="edit-email">Email</label>
+                    <input type="email" id="edit-email" placeholder="Enter your email" />
+                </div>
+                <div class="form-actions">
+                    <button id="saveProfileBtn" class="save-btn">Save Changes</button>
+                    <button id="cancelEditBtn" class="cancel-btn">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- Booking History Section -->
+
+    <div class="section">
+        <h2>Your Recent Bookings</h2>
+        <div class="booking-card">
+            <p><strong>🏨 Hotel:</strong> The Royal Palace, Jaipur</p>
+            <p><strong>📅 Stay:</strong> 12 Feb 2025 - 15 Feb 2025</p>
+            <p><strong>👤 Guests:</strong> 2 Adults</p>
+            <button class="view-btn">View Details</button>
+        </div>
+        <div class="booking-card">
+            <p><strong>🏨 Hotel:</strong> Lakeside Resort, Kerala</p>
+            <p><strong>📅 Stay:</strong> 20 Mar 2025 - 23 Mar 2025</p>
+            <p><strong>👤 Guests:</strong> 3 Adults</p>
+            <button class="view-btn">View Details</button>
+        </div>
+    </div>
+
+    <script src="js/navbar.js"></script>
+    <script src="js/user.js"></script>
+</body>
+</html>
+
+

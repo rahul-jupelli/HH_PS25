@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/destinations.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="dashboard.html" class="logo">Horizon<span>Haven</span></a>
+
+        <!-- Auth area: JS will replace content here when user is logged in -->
+        <div class="nav-links" id="auth-area">
+        <!-- Default guest state -->
+        <a href="login.html" id="List">List your property</a>
+        <button class="login-btn" onclick="window.location.href='login.html'">
+            Log in / Sign up
+        </button>
+        </div>
+    </nav>
+
+    <section id="result">
+
+    </section>
+
+    <section class="results" id="results-section">
+        <div class="results-grid" id="results-grid">
+
+        </div>
+    </section>
+    <script src="js/navbar.js"></script>
+    <script src="js/destinations.js"></script>
+</body>
+</html>

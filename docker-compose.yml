@@ -1,0 +1,102 @@
+version: "3.9"
+
+services:
+  ##############################################
+  # REDIS (already existed - unchanged)
+  ##############################################
+  redis:
+    image: redis:7
+    container_name: horizonhaven-admin
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+  ##############################################
+  # NODE BACKEND (your existing Node project)
+  ##############################################
+  node-backend:
+    build:
+      context: ./node-project     # your backend folder
+      # dockerfile: Dockerfile    # only include if you have one
+    container_name: node-backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./node-project:/app
+      - /app/node_modules
+    env_file:
+      - .env
+
+    environment:
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_KEY: ${SUPABASE_KEY}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      - redis
+      - fastapi
+      - rabbitmq
+
+  ##############################################
+  # FASTAPI AI MICROSERVICE
+  ##############################################
+  fastapi:
+    build:
+      context: ./ai-city-service
+      dockerfile: Dockerfile.fastapi
+    container_name: city-fastapi
+    ports:
+      - "8000:8000"
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      UNSPLASH_API_KEY: ${UNSPLASH_API_KEY}
+      PEXELS_API_KEY: ${PEXELS_API_KEY}
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_SERVICE_ROLE: ${SUPABASE_SERVICE_ROLE_KEY}
+      CELERY_BROKER: amqp://guest:guest@rabbitmq:5672//
+      CELERY_BACKEND: rpc://
+    depends_on:
+      - rabbitmq
+
+  ##############################################
+  # CELERY WORKER for AI tasks
+  ##############################################
+  worker:
+    build:
+      context: ./ai-city-service
+      dockerfile: Dockerfile.worker
+    container_name: city-worker
+    volumes:
+    - ./ai-city-service:/app
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      UNSPLASH_API_KEY: ${UNSPLASH_API_KEY}
+      PEXELS_API_KEY: ${PEXELS_API_KEY}
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_SERVICE_ROLE: ${SUPABASE_SERVICE_ROLE_KEY}
+      CELERY_BROKER: amqp://guest:guest@rabbitmq:5672//
+      CELERY_BACKEND: rpc://
+    depends_on:
+      - rabbitmq
+
+  ##############################################
+  # RABBITMQ (Messsage broker for Celery)
+  ##############################################
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"   # management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+##############################################
+# VOLUMES
+##############################################
+volumes:
+  redis-data:

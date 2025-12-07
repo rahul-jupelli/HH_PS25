@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | Horizon Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="./css/navbar.css" />
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+    <a href="dashboard.html" class="logo">Horizon<span>Haven</span></a>
+
+    <!-- Auth area: JS will replace content here when user is logged in -->
+    <div class="nav-links" id="auth-area">
+      <!-- Default guest state -->
+      <button class="login-btn" onclick="window.location.href='login.html'">
+        Log in / Sign up
+      </button>
+    </div>
+  </nav>
+  <div class="admin-layout">
+      <!-- SIDEBAR -->
+      <nav class="sidebar">
+          <div class="nav">
+              <a href="/admin.html" class="nav-link active">Dashboard</a>
+              <a href="/properties.html" class="nav-link">Properties</a>
+              <a href="/bookings" class="nav-link">Bookings</a>
+          </div>
+          <div class="logout">
+              <a href="#">Log Out</a>
+          </div>
+      </nav>
+  
+      <!-- MAIN CONTENT -->
+      <main class="main">
+          <header class="header">
+              <h1>Overview</h1>
+          </header>
+  
+          <div class="stats-grid" id="stats-container">
+              <div class="card">
+                  <div class="stat-title">Total Revenue</div>
+                  <div class="stat-value">Loading...</div>
+              </div>
+              <div class="card">
+                  <div class="stat-title">Active Bookings</div>
+                  <div class="stat-value">Loading...</div>
+              </div>
+              <div class="card">
+                  <div class="stat-title">Total Properties</div>
+                  <div class="stat-value">Loading...</div>
+              </div>
+          </div>
+  
+          <div class="card">
+              <div class="header" style="margin-bottom: 20px;">
+                  <h3>Recent Bookings</h3>
+                  <a href="/bookings" class="btn btn-outline btn-sm">View All</a>
+              </div>
+              <div class="table-container">
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>Guest</th>
+                              <th>Property</th>
+                              <th>Date</th>
+                              <th>Amount</th>
+                              <th>Status</th>
+                          </tr>
+                      </thead>
+                      <tbody id="recent-bookings-list">
+                          <!-- JS injected -->
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </main>
+
+  </div>
+
+    <script src="js/admin.js"></script>
+    <script src="./js/navbar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', loadDashboardStats);
+    </script>
+</body>
+</html>
