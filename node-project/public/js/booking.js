@@ -7,6 +7,7 @@ const hotelNameEl = document.getElementById("hotelName");
 const roomTypeSelect = document.getElementById("roomType");
 const priceDisplay = document.getElementById("priceDisplay");
 const confirmBtn = document.getElementById("confirmBtn");
+const cancelbooking = document.getElementById("cancelBtn");
 
 const checkinEl = document.getElementById("checkin");
 const checkoutEl = document.getElementById("checkout");
@@ -95,7 +96,6 @@ async function loadHotelData() {
     }
 
     const data = await res.json();
-    console.log(data);
 
 //     if (!hotelId) {
 //         alert("Missing hotel_id in URL");
@@ -238,5 +238,11 @@ confirmBtn.addEventListener("click", async () => {
         console.error("Fetch Error:", err);
         alert("An error occurred. Try again.");
     }
+});
+
+cancelbooking.addEventListener("click", async () => {
+    const params = new URLSearchParams(window.location.search);
+    const current = params.get("href");
+    window.location.href = current;
 });
 loadHotelData();

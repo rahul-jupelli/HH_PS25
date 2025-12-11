@@ -222,7 +222,7 @@ async function availble() {
         return;
       }
       if (token) {
-        window.location.href = `./booking.html?hotel_id=${hotelId}`;
+        window.location.href = `./booking.html?hotel_id=${hotelId}&href=${window.location.href}`;
       } else {
         redirectToLogin();
       }

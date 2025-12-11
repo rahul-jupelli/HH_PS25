@@ -268,7 +268,7 @@ body::after {
 
 .card:hover {
   box-shadow: 0 12px 35px rgba(100, 140, 255, 0.25);
-  transform: translateY(-10px) scale(1.02);
+  transform: translateY(-5px) scale(1.02);
 }
 
 
